@@ -1,4 +1,4 @@
-Guvi Zen Class Database Schema
+##Guvi Zen Class Database Schema
 
 This README provides detailed documentation for the SQL database schema used in the Guvi Zen Class project. It includes descriptions of the tables, relationships, and sample SQL queries for managing the data.
 
