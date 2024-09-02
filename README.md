@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 # Guvi Zen Class Database Schema
 =======
 ##Guvi Zen Class Database Schema
->>>>>>> a99c5e7914aa22e4afca1654150534cae61f2358
 
 This README provides detailed documentation for the SQL database schema used in the Guvi Zen Class project. It includes descriptions of the tables, relationships, and sample SQL queries for managing the data.
 
@@ -37,7 +35,7 @@ CREATE TABLE Users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-Courses Table
+### Courses Table
 Stores information about courses.
 CREATE TABLE Courses (
     course_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -50,7 +48,7 @@ CREATE TABLE Courses (
     FOREIGN KEY (instructor_id) REFERENCES Users(user_id)
 );
 
-Batches Table
+### Batches Table
 Stores information about batches.
 CREATE TABLE Batches (
     batch_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -65,7 +63,7 @@ CREATE TABLE Batches (
     FOREIGN KEY (mentor_id) REFERENCES Users(user_id)
 );
 
-Mentors Table
+### Mentors Table
 Stores mentor-specific information.
 CREATE TABLE Mentors (
     mentor_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -77,7 +75,7 @@ CREATE TABLE Mentors (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
-MockInterviews Table
+### MockInterviews Table
 Stores information about mock interviews.
 CREATE TABLE MockInterviews (
     interview_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -92,7 +90,7 @@ CREATE TABLE MockInterviews (
     FOREIGN KEY (mentor_id) REFERENCES Mentors(mentor_id)
 );
 
-Tasks Table
+### Tasks Table
 Stores tasks related to courses.
 CREATE TABLE Tasks (
     task_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -105,7 +103,7 @@ CREATE TABLE Tasks (
     FOREIGN KEY (course_id) REFERENCES Courses(course_id)
 );
 
-TaskSubmissions Table
+### TaskSubmissions Table
 Stores information about task submissions.
 CREATE TABLE TaskSubmissions (
     submission_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -119,7 +117,7 @@ CREATE TABLE TaskSubmissions (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
-Queries Table
+### Queries Table
 Stores user queries related to batches.
 CREATE TABLE Queries (
     query_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -133,7 +131,7 @@ CREATE TABLE Queries (
     FOREIGN KEY (batch_id) REFERENCES Batches(batch_id)
 );
 
-Dashboards Table
+### Dashboards Table
 Stores user dashboard information.
 CREATE TABLE Dashboards (
     dashboard_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -147,7 +145,7 @@ CREATE TABLE Dashboards (
     FOREIGN KEY (batch_id) REFERENCES Batches(batch_id)
 );
 
-Enrollments Table
+### Enrollments Table
 Stores information about course enrollments.
 CREATE TABLE Enrollments (
     enrollment_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -160,76 +158,76 @@ CREATE TABLE Enrollments (
     FOREIGN KEY (batch_id) REFERENCES Batches(batch_id)
 );
 
-Sample SQL Queries
-Inserting Data
+### Sample SQL Queries
+## Inserting Data
 Insert a New User
 INSERT INTO Users (name, email, password, role, profile_picture) VALUES
 ('Alice Johnson', 'alice.johnson@example.com', 'hashed_password', 'student', 'alice.jpg');
 
-Insert a New Course
+## Insert a New Course
 INSERT INTO Courses (title, description, instructor_id, category) VALUES
 ('Introduction to Python', 'Learn Python from scratch.', 1, 'Programming');
 
-Insert a New Batch
+## Insert a New Batch
 INSERT INTO Batches (course_id, mentor_id, batch_name, start_date, end_date) VALUES
 (1, 1, 'Batch 1', '2024-01-01', '2024-06-30');
 
-Insert a New Mentor
+## Insert a New Mentor
 INSERT INTO Mentors (user_id, expertise_area, experience_years) VALUES
 (1, 'Web Development', 8);
 
-Insert a New Task
+## Insert a New Task
 INSERT INTO Tasks (course_id, title, description, due_date) VALUES
 (1, 'Build a Web App', 'Create a web application using Flask.', '2024-03-01');
 
-Insert a New Task Submission
+## Insert a New Task Submission
 INSERT INTO TaskSubmissions (task_id, user_id, submission_file, submitted_at, grade, feedback) VALUES
 (1, 1, 'webapp.zip', '2024-02-28', 'A', 'Excellent submission!');
 
-Insert a New Query
+## Insert a New Query
 INSERT INTO Queries (user_id, batch_id, query_text, status) VALUES
 (1, 1, 'How to integrate a database with Flask?', 'open');
 
-Insert Dashboard Data
+## Insert Dashboard Data
 INSERT INTO Dashboards (user_id, batch_id, progress, last_login) VALUES
 (1, 1, 75.00, '2024-03-01 10:00:00');
 
-Insert Enrollment
+## Insert Enrollment
 INSERT INTO Enrollments (user_id, course_id, batch_id) VALUES
 (1, 1, 1);
 
-Querying Data
-Retrieve All Users
+### Querying Data
+## Retrieve All Users
 SELECT * FROM Users;
 
-Retrieve All Courses with Their Instructors
+## Retrieve All Courses with Their Instructors
 SELECT Courses.title, Courses.description, Users.name AS instructor_name
 FROM Courses
 JOIN Users ON Courses.instructor_id = Users.user_id;
 
-Retrieve Batches for a Specific Course
+## Retrieve Batches for a Specific Course
 SELECT * FROM Batches WHERE course_id = 1;
 
-Retrieve All Tasks and Their Submissions
+## Retrieve All Tasks and Their Submissions
 SELECT Tasks.title, TaskSubmissions.submission_file, TaskSubmissions.grade
 FROM Tasks
 LEFT JOIN TaskSubmissions ON Tasks.task_id = TaskSubmissions.task_id;
 
-Retrieve Queries for a Specific Batch
+## Retrieve Queries for a Specific Batch
 SELECT * FROM Queries WHERE batch_id = 1;
 
-Updating Data
-Update User Profile Picture
+### Updating Data
+## Update User Profile Picture
 UPDATE Users SET profile_picture = 'new_picture.jpg' WHERE user_id = 1;
 
-Update Task Due Date
+## Update Task Due Date
 UPDATE Tasks SET due_date = '2024-04-01' WHERE task_id = 1;
 
-Deleting Data
-Delete a Task
+### Deleting Data
+## Delete a Task
 DELETE FROM Tasks WHERE task_id = 1;
 
-Delete a User
+## Delete a User
 DELETE FROM Users WHERE user_id = 1;
 
 ## Relationships and Foreign Keys
@@ -244,7 +242,6 @@ DELETE FROM Users WHERE user_id = 1;
 1. Dashboards track Users and their Batches progress.
 1. Enrollments link Users to Courses and Batches.
 
-<<<<<<< HEAD
 ## Additional Notes
 Ensure that all foreign key constraints are correctly managed to maintain referential integrity.
 Indexing frequently queried columns (e.g., user_id, course_id) can improve query performance.
@@ -254,4 +251,3 @@ Additional Notes
     Ensure that all foreign key constraints are correctly managed to maintain referential integrity.
     Indexing frequently queried columns (e.g., user_id, course_id) can improve query performance.
     Regularly back up your database to prevent data loss.
->>>>>>> a99c5e7914aa22e4afca1654150534cae61f2358
