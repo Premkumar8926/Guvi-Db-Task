@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Guvi Zen Class Database Schema
+=======
+##Guvi Zen Class Database Schema
+>>>>>>> a99c5e7914aa22e4afca1654150534cae61f2358
 
 This README provides detailed documentation for the SQL database schema used in the Guvi Zen Class project. It includes descriptions of the tables, relationships, and sample SQL queries for managing the data.
 
@@ -240,7 +244,14 @@ DELETE FROM Users WHERE user_id = 1;
 1. Dashboards track Users and their Batches progress.
 1. Enrollments link Users to Courses and Batches.
 
+<<<<<<< HEAD
 ## Additional Notes
 Ensure that all foreign key constraints are correctly managed to maintain referential integrity.
 Indexing frequently queried columns (e.g., user_id, course_id) can improve query performance.
 Regularly back up your database to prevent data loss.
+=======
+Additional Notes
+    Ensure that all foreign key constraints are correctly managed to maintain referential integrity.
+    Indexing frequently queried columns (e.g., user_id, course_id) can improve query performance.
+    Regularly back up your database to prevent data loss.
+>>>>>>> a99c5e7914aa22e4afca1654150534cae61f2358
