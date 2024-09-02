@@ -1,0 +1,99 @@
+Table Users {
+    user_id int [pk, increment]
+    name varchar(255)
+    email varchar(255) [unique]
+    password varchar(255)
+    role enum('student', 'instructor', 'admin', 'mentor')
+    profile_picture varchar(255)
+    created_at timestamp [default: `CURRENT_TIMESTAMP`]
+    updated_at timestamp [default: `CURRENT_TIMESTAMP`]
+}
+
+Table Courses {
+    course_id int [pk, increment]
+    title varchar(255)
+    description text
+    instructor_id int [ref: > Users.user_id]
+    category varchar(255)
+    created_at timestamp [default: `CURRENT_TIMESTAMP`]
+    updated_at timestamp [default: `CURRENT_TIMESTAMP`]
+}
+
+Table Batches {
+    batch_id int [pk, increment]
+    course_id int [ref: > Courses.course_id]
+    mentor_id int [ref: > Users.user_id]
+    batch_name varchar(255)
+    start_date date
+    end_date date
+    created_at timestamp [default: `CURRENT_TIMESTAMP`]
+    updated_at timestamp [default: `CURRENT_TIMESTAMP`]
+}
+
+Table Mentors {
+    mentor_id int [pk, increment]
+    user_id int [ref: > Users.user_id]
+    expertise_area varchar(255)
+    experience_years int
+    created_at timestamp [default: `CURRENT_TIMESTAMP`]
+    updated_at timestamp [default: `CURRENT_TIMESTAMP`]
+}
+
+Table MockInterviews {
+    interview_id int [pk, increment]
+    user_id int [ref: > Users.user_id]
+    mentor_id int [ref: > Mentors.mentor_id]
+    scheduled_at timestamp
+    feedback text
+    score int
+    created_at timestamp [default: `CURRENT_TIMESTAMP`]
+    updated_at timestamp [default: `CURRENT_TIMESTAMP`]
+}
+
+Table Tasks {
+    task_id int [pk, increment]
+    course_id int [ref: > Courses.course_id]
+    title varchar(255)
+    description text
+    due_date date
+    created_at timestamp [default: `CURRENT_TIMESTAMP`]
+    updated_at timestamp [default: `CURRENT_TIMESTAMP`]
+}
+
+Table TaskSubmissions {
+    submission_id int [pk, increment]
+    task_id int [ref: > Tasks.task_id]
+    user_id int [ref: > Users.user_id]
+    submission_file varchar(255)
+    submitted_at timestamp
+    grade varchar(50)
+    feedback text
+}
+
+Table Queries {
+    query_id int [pk, increment]
+    user_id int [ref: > Users.user_id]
+    batch_id int [ref: > Batches.batch_id]
+    query_text text
+    status enum('open', 'resolved') [default: 'open']
+    created_at timestamp [default: `CURRENT_TIMESTAMP`]
+    updated_at timestamp [default: `CURRENT_TIMESTAMP`]
+}
+
+Table Dashboards {
+    dashboard_id int [pk, increment]
+    user_id int [ref: > Users.user_id]
+    batch_id int [ref: > Batches.batch_id]
+    progress decimal(5,2)
+    last_login timestamp
+    created_at timestamp [default: `CURRENT_TIMESTAMP`]
+    updated_at timestamp [default: `CURRENT_TIMESTAMP`]
+}
+
+Table Enrollments {
+    enrollment_id int [pk, increment]
+    user_id int [ref: > Users.user_id]
+    course_id int [ref: > Courses.course_id]
+    batch_id int [ref: > Batches.batch_id]
+    enrollment_date timestamp [default: `CURRENT_TIMESTAMP`]
+}

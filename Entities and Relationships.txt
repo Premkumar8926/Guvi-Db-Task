@@ -1,0 +1,33 @@
+Users
+Attributes: user_id, name, email, password, role (student, instructor, admin, mentor), profile_picture, created_at, updated_at
+Relationships: A user can belong to a batch, can be a mentor for multiple batches, can be an instructor, and can enroll in multiple courses.
+2. Courses
+Attributes: course_id, title, description, instructor_id (foreign key to Users), category, created_at, updated_at
+Relationships: A course can have multiple lessons, and many students can enroll in a course.
+3. Batches
+Attributes: batch_id, course_id (foreign key to Courses), mentor_id (foreign key to Users), batch_name, start_date, end_date, created_at, updated_at
+Relationships: A batch is associated with one course, has one mentor, and can have many students.
+4. Lessons
+Attributes: lesson_id, course_id (foreign key to Courses), title, content, video_url, created_at, updated_at
+Relationships: A lesson belongs to a course.
+5. Mentors
+Attributes: mentor_id, user_id (foreign key to Users), expertise_area, experience_years, created_at, updated_at
+Relationships: A mentor can guide multiple batches and can provide feedback on tasks and mock interviews.
+6. Mock Interviews
+Attributes: interview_id, user_id (foreign key to Users), mentor_id (foreign key to Mentors), scheduled_at, feedback, score, created_at, updated_at
+Relationships: A mock interview is conducted by a mentor for a student.
+7. Tasks
+Attributes: task_id, course_id (foreign key to Courses), title, description, due_date, created_at, updated_at
+Relationships: A task is associated with a course, and students can submit tasks.
+8. Task Submissions
+Attributes: submission_id, task_id (foreign key to Tasks), user_id (foreign key to Users), submission_file, submitted_at, grade, feedback
+Relationships: Students submit their work for tasks, and mentors provide feedback.
+9. Queries
+Attributes: query_id, user_id (foreign key to Users), batch_id (foreign key to Batches), query_text, status (open, resolved), created_at, updated_at
+Relationships: A student can ask queries related to their batch/course, and mentors or instructors can respond.
+10. Dashboards
+Attributes: dashboard_id, user_id (foreign key to Users), batch_id (foreign key to Batches), progress, last_login, created_at, updated_at
+Relationships: Each user has a dashboard that tracks their progress in a batch.
+11. Enrollments
+Attributes: enrollment_id, user_id (foreign key to Users), course_id (foreign key to Courses), batch_id (foreign key to Batches), enrollment_date
+Relationships: This table links users to courses and batches.

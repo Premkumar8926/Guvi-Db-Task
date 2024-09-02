@@ -1,0 +1,10 @@
+Here's a high-level overview of how these entities could be related:
+
+    -Users enroll in Courses.
+    -Courses contain Lessons.
+    -Lessons have associated Quizzes and Comments.
+    -Quizzes have multiple Questions.
+    -Questions have multiple Options.
+    -Users can make Submissions for Quizzes.
+    -Courses have Assignments, and Users submit their Assignment Submissions.
+    -Users receive Notifications.
