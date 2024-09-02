@@ -1,22 +1,27 @@
-Guvi Zen Class Database Schema
+# Guvi Zen Class Database Schema
 
 This README provides detailed documentation for the SQL database schema used in the Guvi Zen Class project. It includes descriptions of the tables, relationships, and sample SQL queries for managing the data.
 
-Table of Contents
-    1. Database Schema Overview
-    2. Tables and Their Descriptions
-    3. Sample SQL Queries
-    4. Data Insertion Examples
-    5. Relationships and Foreign Keys
-    6. Additional Notes
+## Table of Contents
 
-Database Schema Overview
+1. [Database Schema Overview](#database-schema-overview)
+2. [Tables and Their Descriptions](#tables-and-their-descriptions)
+3. [Sample SQL Queries](#sample-sql-queries)
+4. [Data Insertion Examples](#data-insertion-examples)
+5. [Relationships and Foreign Keys](#relationships-and-foreign-keys)
+6. [Additional Notes](#additional-notes)
+
+## Database Schema Overview
+
 The database schema is designed to manage users, courses, batches, mentors, mock interviews, tasks, task submissions, queries, dashboards, and enrollments for the Guvi Zen Class platform.
 
-Tables and Their Descriptions
+## Tables and Their Descriptions
 
-Users Table
+### Users Table
+
 Stores user information.
+
+```sql
 CREATE TABLE Users (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -139,7 +144,7 @@ CREATE TABLE Dashboards (
 );
 
 Enrollments Table
-Stores information about course enrollments
+Stores information about course enrollments.
 CREATE TABLE Enrollments (
     enrollment_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
@@ -223,19 +228,19 @@ DELETE FROM Tasks WHERE task_id = 1;
 Delete a User
 DELETE FROM Users WHERE user_id = 1;
 
-Relationships and Foreign Keys
-    Users can be instructors, mentors, or students.
-    Courses are taught by Users (instructors).
-    Batches are associated with Courses and Users (mentors).
-    Mentors are also Users.
-    MockInterviews link Users with Mentors.
-    Tasks are associated with Courses.
-    TaskSubmissions are linked to Tasks and Users.
-    Queries are associated with Users and Batches.
-    Dashboards track Users and their Batches progress.
-    Enrollments link Users to Courses and Batches.
+## Relationships and Foreign Keys
+1. Users can be instructors, mentors, or students.
+1. Courses are taught by Users (instructors).
+1. Batches are associated with Courses and Users (mentors).
+1. Mentors are also Users.
+1. MockInterviews link Users with Mentors.
+1. Tasks are associated with Courses.
+1. TaskSubmissions are linked to Tasks and Users.
+1. Queries are associated with Users and Batches.
+1. Dashboards track Users and their Batches progress.
+1. Enrollments link Users to Courses and Batches.
 
-Additional Notes
-    Ensure that all foreign key constraints are correctly managed to maintain referential integrity.
-    Indexing frequently queried columns (e.g., user_id, course_id) can improve query performance.
-    Regularly back up your database to prevent data loss.
+## Additional Notes
+Ensure that all foreign key constraints are correctly managed to maintain referential integrity.
+Indexing frequently queried columns (e.g., user_id, course_id) can improve query performance.
+Regularly back up your database to prevent data loss.
